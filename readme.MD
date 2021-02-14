@@ -1,7 +1,9 @@
 # Flat costs api (express)
 
+*(based on tutorial)*
+
 ## Commands
 
 ### Run application
 
-- `yarn dev` / `npm run dev`
+- `yarn serve` / `npm run serve`
