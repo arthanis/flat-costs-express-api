@@ -95,6 +95,11 @@ module.exports.update = (req, res) => {
     });
 };
 
+/**
+ * Delete category
+ * @param {*} req
+ * @param {*} res
+ */
 module.exports.delete = (req, res) => {
   const id = req.params.id;
 
