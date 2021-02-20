@@ -17,6 +17,5 @@ module.exports = app => {
   // Delete a category with id
   router.delete('/categories/:id', categories.delete);
 
-
   app.use('/api', router);
 };
