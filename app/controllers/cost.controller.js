@@ -1,4 +1,5 @@
 const db = require('../models');
+const Category = db.category;
 const Cost = db.cost;
 const Op = db.Sequelize.Op;
 
@@ -16,19 +17,32 @@ module.exports.create = (req, res) => {
     return;
   }
 
-  Cost.create({
-    value: req.body.value,
-    date: req.body.date,
-    categoryId: req.body.categoryId
-  })
-  .then((data) => {
-    res.send(data);
-  })
-  .catch((err) => {
-    res.status(500).send({
-      message: err.message || 'Some error occurred while creating the Cost'
-    });
-  });
+  // Check category is exists
+  Category.findByPk(req.body.categoryId)
+    .then(result => {
+      if (result) {
+        Cost.create({
+          value: req.body.value,
+          date: req.body.date,
+          categoryId: req.body.categoryId
+        })
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: err.message || 'Some error occurred while creating the Cost.'
+          });
+        });
+      } else {
+        res.status(500).send({
+          message: "Cannot create the Cost, because the associated Category does not exist."
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
 };
 
 /**
@@ -63,7 +77,7 @@ module.exports.findOne = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: `Error retrieving Cost with id = ${id}`
+        message: `Error retrieving Cost with id = ${id}.`
       });
     });
 };
@@ -76,24 +90,34 @@ module.exports.findOne = (req, res) => {
 module.exports.update = (req, res) => {
   const id = req.params.id;
 
-  Cost.update(req.body, {
-      where: { id: id }
-    })
-    .then(num => {
-      if (Boolean(num)) {
-        res.send({
-          message: 'Cost was updated successfully.'
+  // Check category is exists
+  Category.findByPk(req.body.categoryId)
+    .then(result => {
+      if (result) {
+        Cost.update(req.body, {
+          where: { id: id }
+        })
+        .then(num => {
+          if (Boolean(num)) {
+            res.send({
+              message: 'Cost was updated successfully.'
+            });
+          } else {
+            res.send({
+              message: `Cannot update Cost with id = ${id}. Maybe Cost was not found or req.body is empty.`
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: `Error updating Cost with id = ${id}`
+          });
         });
       } else {
-        res.send({
-          message: `Cannot update Cost with id = ${id}. Maybe Cost was not found or req.body is empty!`
+        res.status(500).send({
+          message: "Cannot update the Cost, because the associated Category does not exist."
         });
       }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: `Error updating Cost with id = ${id}`
-      });
     });
 };
 
@@ -111,17 +135,17 @@ module.exports.delete = (req, res) => {
     .then(num => {
       if (Boolean(num)) {
         res.send({
-          message: 'Cost was deleted successfully!'
+          message: 'Cost was deleted successfully.'
         });
       } else {
         res.send({
-          message: `Cannot delete Cost with id = ${id}. Maybe Cost was not found!`
+          message: `Cannot delete Cost with id = ${id}. Maybe Cost was not found.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: `Could not delete Cost with id = ${id}`
+        message: `Could not delete Cost with id = ${id}.`
       });
     });
 };

@@ -10,7 +10,7 @@ const Op = db.Sequelize.Op;
 module.exports.create = (req, res) =>{
   if (!req.body.name) {
     res.status(400).send({
-      message: 'Content can not be empty!'
+      message: 'Content cannot be empty!'
     });
 
     return;
@@ -19,12 +19,12 @@ module.exports.create = (req, res) =>{
   Category.create({
       name: req.body.name
     })
-    .then((data) => {
+    .then(data => {
       res.send(data);
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while creating the Category'
+        message: err.message || 'Some error occurred while creating the Category.'
       });
     });
 };
@@ -61,7 +61,7 @@ module.exports.findOne = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: `Error retrieving Category with id = ${id}`
+        message: `Error retrieving Category with id = ${id}.`
       });
     });
 };
@@ -84,13 +84,13 @@ module.exports.update = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update Category with id = ${id}. Maybe Category was not found or req.body is empty!`
+          message: `Cannot update Category with id = ${id}. Maybe Category was not found or req.body is empty.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: `Error updating Category with id = ${id}`
+        message: `Error updating Category with id = ${id}.`
       });
     });
 };
@@ -109,17 +109,17 @@ module.exports.delete = (req, res) => {
     .then(num => {
       if (Boolean(num)) {
         res.send({
-          message: 'Category was deleted successfully!'
+          message: 'Category was deleted successfully.'
         });
       } else {
         res.send({
-          message: `Cannot delete Category with id = ${id}. Maybe Category was not found!`
+          message: `Cannot delete Category with id = ${id}. Maybe Category was not found.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: `Could not delete Category with id = ${id}`
+        message: `Could not delete Category with id = ${id}.`
       });
     });
 };
