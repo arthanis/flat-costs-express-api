@@ -1,6 +1,7 @@
 module.exports = app => {
-  const costs = require('../controllers/cost.controller.js');
+  const CostController = require('../controllers/cost.controller.js');
   const router = require('express').Router();
+  const costs = new CostController();
 
   // Create a new cost
   router.post('/costs', costs.create);

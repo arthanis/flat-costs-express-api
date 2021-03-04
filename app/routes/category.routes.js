@@ -1,6 +1,7 @@
 module.exports = app => {
-  const categories = require('../controllers/category.controller.js');
+  const CategoryController = require('../controllers/category.controller.js');
   const router = require('express').Router();
+  const categories = new CategoryController();
 
   // Create a new category
   router.post('/categories', categories.create);
