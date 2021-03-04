@@ -11,7 +11,7 @@ class CategoryController {
   create(req, res) {
     if (!req.body.name) {
       res.status(400).send({
-        message: "Content cannot be empty!",
+        message: 'Content cannot be empty!',
       });
 
       return;
@@ -26,7 +26,7 @@ class CategoryController {
       .catch((err) => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Category.",
+            err.message || 'Some error occurred while creating the Category.',
         });
       });
   }
@@ -44,7 +44,7 @@ class CategoryController {
       .catch((err) => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving categories.",
+            err.message || 'Some error occurred while retrieving categories.',
         });
       });
   }
@@ -82,7 +82,7 @@ class CategoryController {
       .then((num) => {
         if (Boolean(num)) {
           res.send({
-            message: "Category was updated successfully.",
+            message: 'Category was updated successfully.',
           });
         } else {
           res.send({
@@ -111,7 +111,7 @@ class CategoryController {
       .then((num) => {
         if (Boolean(num)) {
           res.send({
-            message: "Category was deleted successfully.",
+            message: 'Category was deleted successfully.',
           });
         } else {
           res.send({

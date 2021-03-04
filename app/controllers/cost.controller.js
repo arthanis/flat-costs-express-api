@@ -37,7 +37,7 @@ class CostController {
           });
         } else {
           res.status(500).send({
-            message: "Cannot create the Cost, because the associated Category does not exist."
+            message: 'Cannot create the Cost, because the associated Category does not exist.'
           });
         }
       })
@@ -116,7 +116,7 @@ class CostController {
           });
         } else {
           res.status(500).send({
-            message: "Cannot update the Cost, because the associated Category does not exist."
+            message: 'Cannot update the Cost, because the associated Category does not exist.'
           });
         }
       });
