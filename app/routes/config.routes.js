@@ -1,11 +1,27 @@
 module.exports = app => {
   const router = require('express').Router();
 
-  // Retrieve all columns (@todo - dynamic)
+  // Retrieve all columns
   router.get('/config', (req, res) => res.json({
     columns: {
-      categories: ['name'],
-      costs: ['categoryId', 'date', 'value'],
+      categories: [{
+        name: 'name',
+        type: 'text',
+      }],
+      costs: [{
+        name: 'categoryId',
+        type: 'select',
+        options: {
+          belongsTo: 'categories',
+          belongsToName: 'category'
+        }
+      }, {
+        name: 'date',
+        type: 'date'
+      }, {
+        name: 'value',
+        type: 'number'
+      }],
     },
   }));
 
