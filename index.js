@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 require('./app/routes/category.routes')(app);
 require('./app/routes/cost.routes')(app);
+require('./app/routes/config.routes')(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
