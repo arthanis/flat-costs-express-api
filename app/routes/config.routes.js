@@ -3,25 +3,29 @@ module.exports = app => {
 
   // Retrieve all columns
   router.get('/config', (req, res) => res.json({
-    columns: {
-      categories: [{
-        name: 'name',
-        type: 'text',
-      }],
-      costs: [{
-        name: 'categoryId',
-        type: 'select',
-        options: {
-          belongsTo: 'categories',
-          belongsToName: 'category'
-        }
-      }, {
-        name: 'date',
-        type: 'date'
-      }, {
-        name: 'value',
-        type: 'number'
-      }],
+    entities: {
+      categories: {
+        columns: [{
+          name: 'name',
+          type: 'text',
+        }],
+      },
+      costs: {
+        columns: [{
+          name: 'categoryId',
+          type: 'select',
+          options: {
+            belongsTo: 'categories',
+            belongsToName: 'category'
+          }
+        }, {
+          name: 'date',
+          type: 'date'
+        }, {
+          name: 'value',
+          type: 'number'
+        }],
+      }
     },
   }));
 
