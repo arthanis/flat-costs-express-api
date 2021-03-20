@@ -5,12 +5,20 @@ module.exports = app => {
   router.get('/config', (req, res) => res.json({
     entities: {
       categories: {
+        names: {
+          singular: 'category',
+          plural: 'categories',
+        },
         columns: [{
           name: 'name',
           type: 'text',
         }],
       },
       costs: {
+        names: {
+          singular: 'cost',
+          plural: 'costs',
+        },
         columns: [{
           name: 'categoryId',
           type: 'select',
